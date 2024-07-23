@@ -1,21 +1,22 @@
 import mongoose from "mongoose";
-const Courses=new mongoose.Schema({
+const CourseSchema=new mongoose.Schema({
     name:{
-      type:  String,
-      required:true,
-      minLength:3
+      type: String
+    }
+      ,
+    level:{
+     type: String
     },
-    createdAt:{
-        type:Date,
-        default: ()=>Date.now(),
-        immutable:true,
-    },
-    updatedAt:Date,
-    prerequisite:{
-      type:  [mongoose.SchemaTypes.ObjectId],
+    prerequisite:[{
+      type:mongoose.SchemaTypes.ObjectId,
       ref:"Courses"
     }
+    ],
+  //   createdAt:{
+  //     type:Date,
+  //     default: ()=>Date.now(),
+  //     immutable:true,
+  // },
 })
-// export default mongoose.model("Courses",Courses);
-const CourseSchema=mongoose.model("Courses",Courses);
-export {CourseSchema}
+const Courses=mongoose.model("Courses",CourseSchema);
+export {Courses}
